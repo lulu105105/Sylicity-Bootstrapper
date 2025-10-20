@@ -15,6 +15,14 @@ Join the **Sylicity Discord server** [here](https://discord.gg/sA9BedEq5Y).
 
 ---
 
+## Building
+tutorial:
+clone repository
+run go build
+done
+
+(Yes, its really that simple.)
+
 ## To-Do
 - [x] Replace Nekoria Visuals with Sylicity Visuals
 - [ ] Make the bootstrapper actually work
