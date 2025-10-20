@@ -1,11 +1,11 @@
-# Sylicity Bootstraper
-The bootstraper for Sylicity.
+# Sylicity Bootstrapper
 
-This page is maintained by Uwie
-The Sylicity Discord server is right over [here]((https://discord.gg/sA9BedEq5Y))<br/>
+The official bootstrapper for **Sylicity**.
 
-## Warnings & Notices
-> This has been forked from the Nekoria Bootstraper, also from Uwie.
+This page is maintained by **Uwie**.  
+Join the **Sylicity Discord server** [here](https://discord.gg/sA9BedEq5Y).
+
+---
 
 ## Clients
 - [x] 2016 (for now)
@@ -13,9 +13,14 @@ The Sylicity Discord server is right over [here]((https://discord.gg/sA9BedEq5Y)
 - [ ] 2018
 - [ ] 2019
 
-## Todo
+---
+
+## To-Do
 - [x] Replace Nekoria Visuals with Sylicity Visuals
-- [ ] Make the bootstraper actually work
+- [ ] Make the bootstrapper actually work
+
+---
 
 ## Contribution & Credits
-Want to contribute? Simply create a pull request, or if you are experiencing problems please open an issue.
+Want to contribute? Simply create a pull request!  
+If you encounter any issues, please open an issue in this repository.
