@@ -31,12 +31,12 @@ import (
 )
 
 const (
-	versionURL      = "https://setup.kroner.lol/version" // currently placeholder
-	downloadURLBase = "https://setup.kroner.lol/" // currently placeholder
-	appName         = "Nekoria"
-	protocolScheme  = "nekoria-player" // for later
+	versionURL      = "https://setup.no.lol/version" // currently placeholder
+	downloadURLBase = "https://setup.no.lol/" // currently placeholder
+	appName         = "Sylicity"
+	protocolScheme  = "sylicity-player" // for later
 	authURLDefault  = "https://www.kroner.lol/Login/Negotiate.ashx"
-	clientVersionsAPI = "https://clientversions.kroner.lol/v1/client-versions" // currently placeholder
+	clientVersionsAPI = "https://clientversions.no.lol/v1/client-versions" // currently placeholder
 )
 
 type greenTheme struct {
@@ -76,7 +76,7 @@ func main() {
 	}
 
 	myApp := app.New()
-	myWindow := myApp.NewWindow("Nekoria Installer")
+	myWindow := myApp.NewWindow("Sylicity Installer")
 
 	detectedVariant := themecode.DetectSystemTheme()
 	var baseTheme fyne.Theme
@@ -87,7 +87,7 @@ func main() {
 	}
 	myApp.Settings().SetTheme(&greenTheme{Theme: baseTheme})
 
-	logoImage := canvas.NewImageFromFile("Nekoria.png")
+	logoImage := canvas.NewImageFromFile("Sylicity.png")
 	logoImage.FillMode = canvas.ImageFillContain
 	logoImage.SetMinSize(fyne.NewSize(96, 96))
 
@@ -278,7 +278,7 @@ func checkAndUpdateClients(appDir string, onProgress func(string, float32), forc
 
 	for year, info := range clients {
 		clientDir := filepath.Join(versionsDir, fmt.Sprintf("Client%s", year))
-		exePath := filepath.Join(clientDir, "NekoriaPlayerBeta.exe")
+		exePath := filepath.Join(clientDir, "SylicityPlayerBeta.exe")
 
 		needsInstall := forceInstall
 		if !forceInstall {
@@ -334,7 +334,7 @@ func downloadSpecificClient(appDir, clientYear string, onProgress func(string, f
 
 	versionsDir := filepath.Join(appDir, "Versions")
 	clientDir := filepath.Join(versionsDir, fmt.Sprintf("Client%s", clientYear))
-	exePath := filepath.Join(clientDir, "NekoriaPlayerBeta.exe")
+	exePath := filepath.Join(clientDir, "SylicityPlayerBeta.exe")
 
 	needsInstall := forceInstall
 	if !forceInstall {
@@ -523,7 +523,7 @@ func runInstallerLogic(opts LaunchOptions, label *widget.Label, cLoader fyne.Can
 	}
 
 	if opts.LaunchMode == "play" {
-		label.SetText("Starting Nekoria...")
+		label.SetText("Starting Sylicity...")
 		if err := launchClient(appDir, opts); err != nil {
 			label.SetText(fmt.Sprintf("Failed to launch: %v", err))
 			if isAnimating {
@@ -548,7 +548,7 @@ func runInstallerLogic(opts LaunchOptions, label *widget.Label, cLoader fyne.Can
 	}
 
 	if opts.LaunchMode != "play" {
-		label.SetText("Nekoria is ready!")
+		label.SetText("Sylicity is ready!")
 		cLoader.Hide()
 		btn.SetText("Finish")
 		btn.OnTapped = func() { win.Close() }
@@ -599,18 +599,18 @@ func createDesktopFile() error {
 	if err != nil {
 		return err
 	}
-	desktopFilePath := filepath.Join(homeDir, ".local", "share", "applications", "nekoria-installer.desktop")
+	desktopFilePath := filepath.Join(homeDir, ".local", "share", "applications", "sylicity-installer.desktop")
 
 	exePath, err := os.Executable()
 	if err != nil {
 		return err
 	}
 	// TODO: embed the file inside the launcher
-	iconPath := filepath.Join(filepath.Dir(exePath), "Nekoria.png")
+	iconPath := filepath.Join(filepath.Dir(exePath), "Sylicity.png")
 
 	desktopContent := fmt.Sprintf(`[Desktop Entry]
-Name=Nekoria
-Comment=Nekoria Game Launcher
+Name=Sylicity
+Comment=Sylicity Launcher
 Exec="%s"
 Icon=%s
 Terminal=false
@@ -628,7 +628,7 @@ func launchClient(appDir string, opts LaunchOptions) error {
     }
 
     clientFolder := fmt.Sprintf("Client%s", clientYear)
-    exeName := "NekoriaPlayerBeta.exe"
+    exeName := "SylicityPlayerBeta.exe"
     exePath := filepath.Join(appDir, "Versions", clientFolder, exeName)
 
     if _, err := os.Stat(exePath); os.IsNotExist(err) {
