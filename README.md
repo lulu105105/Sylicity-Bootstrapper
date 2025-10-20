@@ -17,6 +17,9 @@ Join the **Sylicity Discord server** [here](https://discord.gg/sA9BedEq5Y).
 
 ## Building
 
+### Dependencies
+- The Go programming language
+
 ### Tutorial
 
 1. Clone the repository:
@@ -30,7 +33,7 @@ Join the **Sylicity Discord server** [here](https://discord.gg/sA9BedEq5Y).
    go build
    ```
 
-3. Done
+3. Done! 🎉  
    *(Yes, it’s really that simple.)*
 
 ---
