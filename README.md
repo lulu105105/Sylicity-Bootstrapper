@@ -21,7 +21,7 @@ Join the **Sylicity Discord server** [here](https://discord.gg/sA9BedEq5Y).
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/sylicity-bootstrapper.git
+   git clone https://github.com/lulu105105/sylicity-bootstrapper.git
    cd sylicity-bootstrapper
    ```
 
