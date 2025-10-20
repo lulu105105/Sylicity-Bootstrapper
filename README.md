@@ -16,12 +16,24 @@ Join the **Sylicity Discord server** [here](https://discord.gg/sA9BedEq5Y).
 ---
 
 ## Building
-tutorial:
-clone repository
-run go build
-done
 
-(Yes, its really that simple.)
+### Tutorial
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/sylicity-bootstrapper.git
+   cd sylicity-bootstrapper
+   ```
+
+2. Build the project:
+   ```bash
+   go build
+   ```
+
+3. Done
+   *(Yes, it’s really that simple.)*
+
+---
 
 ## To-Do
 - [x] Replace Nekoria Visuals with Sylicity Visuals
