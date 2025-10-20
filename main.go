@@ -17,9 +17,9 @@ import (
 	"strings"
 	"sync"
 	"time"
-	"syscall"
 
-	"nekoriabootstrapper/themecode"
+	"sylicitybootstrapper/themecode"
+	"sylicitybootstrapper/clientlaunchcalls"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
@@ -622,51 +622,43 @@ Categories=Game;
 }
 
 func launchClient(appDir string, opts LaunchOptions) error {
-    clientYear := opts.ClientYear
-    if clientYear == "" {
-        clientYear = "2017"
-    }
+	clientYear := opts.ClientYear
+	if clientYear == "" {
+		clientYear = "2016"
+	}
 
-    clientFolder := fmt.Sprintf("Client%s", clientYear)
-    exeName := "SylicityPlayerBeta.exe"
-    exePath := filepath.Join(appDir, "Versions", clientFolder, exeName)
+	clientFolder := fmt.Sprintf("Client%s", clientYear)
+	exeName := "SylicityPlayerBeta.exe"
+	exePath := filepath.Join(appDir, "Versions", clientFolder, exeName)
 
-    if _, err := os.Stat(exePath); os.IsNotExist(err) {
-        return fmt.Errorf("client executable not found: %s", exePath)
-    }
+	if _, err := os.Stat(exePath); os.IsNotExist(err) {
+		return fmt.Errorf("client executable not found: %s", exePath)
+	}
 
-    var args []string
-    if opts.LaunchMode == "play" {
-        args = append(args, "--play")
-        args = append(args, "--authenticationUrl", authURLDefault)
-        args = append(args, "--authenticationTicket", opts.AuthTicket)
-        args = append(args, "--joinScriptUrl", opts.Script)
-    }
+	var args []string
+	if opts.LaunchMode == "play" {
+		args = append(args, "--play")
+		args = append(args, "--authenticationUrl", authURLDefault)
+		args = append(args, "--authenticationTicket", opts.AuthTicket)
+		args = append(args, "--joinScriptUrl", opts.Script)
+	}
 
-    fmt.Printf("Launching client with command:\n%s %s\n", exePath, strings.Join(args, " "))
+	fmt.Printf("Launching client with command:\n%s %s\n", exePath, strings.Join(args, " "))
 
-    cmd := exec.Command(exePath, args...)
-	// TODO: windows support for this call, will do later, as it's not top priority right now.
-        cmd.SysProcAttr = &syscall.SysProcAttr{Setsid: true}
+	cmd := exec.Command(exePath, args...)
+	clientlaunchcalls.SetupProcAttr(cmd)
 
-        devnull, err := os.OpenFile(os.DevNull, os.O_RDWR, 0)
-        if err == nil {
-            cmd.Stdin = devnull
-            cmd.Stdout = devnull
-            cmd.Stderr = devnull
-            defer devnull.Close()
-       }
-    if err := cmd.Start(); err != nil {
-        return fmt.Errorf("failed to start client: %w", err)
-    }
+	if err := cmd.Start(); err != nil {
+		return fmt.Errorf("failed to start client: %w", err)
+	}
 
-    if cmd.Process == nil {
-        return fmt.Errorf("process started but process handle is nil")
-    }
+	if cmd.Process == nil {
+		return fmt.Errorf("process started but process handle is nil")
+	}
 
-    if err := cmd.Process.Release(); err != nil {
-        return fmt.Errorf("started client but failed to detach (release): %w", err)
-    }
+	if err := cmd.Process.Release(); err != nil {
+		return fmt.Errorf("started client but failed to detach (release): %w", err)
+	}
 
-    return nil
+	return nil
 }
